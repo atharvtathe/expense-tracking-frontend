@@ -24,9 +24,9 @@ function App() {
 						{isLoggedIn && <Home />}
 						{!isLoggedIn && <Homenotlogin />}
 					</Route>
-					<Route exact path="/reports">
+					{isLoggedIn && <Route exact path="/reports">
 						<Report />
-					</Route>
+					</Route>}
 					{!isLoggedIn && <Route exact path="/login">
 						<Login />
 					</Route>}
