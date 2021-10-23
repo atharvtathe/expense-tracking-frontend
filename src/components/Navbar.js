@@ -28,6 +28,11 @@ const Navbar = () => {
 		history.replace('/')
 	}
 
+	const logoutmobile = () => {
+		Sethamopen(false);
+		logouthandler();
+	}
+
 	return (
 		<div className="fixed top-0 w-full z-30 ">
 
@@ -85,7 +90,7 @@ const Navbar = () => {
 					{isLoggedIn && <li className="">
 						<Link to="/reports">
 
-							<span className="block  px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-gray-100">Reports</span>
+							<span className="block  px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-gray-100" onClick={() => Sethamopen(false)}>Reports</span>
 
 						</Link>
 					</li>}
@@ -93,18 +98,18 @@ const Navbar = () => {
 					{!isLoggedIn && <li className="">
 						<Link to="/login">
 
-							<span className="block  px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-gray-100">Login</span>
+							<span className="block  px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-gray-100" onClick={() => Sethamopen(false)}>Login</span>
 
 						</Link>
 					</li>}
 					{isLoggedIn && <li className="block md:hidden">
-						<span className="font-medium  rounded font-sans text-sm text-gray-600 py-1 px-2 hover:bg-gray-100" onClick={logouthandler}>Logout</span>
+						<span className="block cursor-pointer px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-gray-100" onClick={() => logoutmobile()}>Logout</span>
 					</li>}
 
 					{!isLoggedIn && <li className=" ">
 						<Link to="/signup">
 
-							<span className="block bg-indigo-900 text-white px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-indigo-800">Sign Up</span>
+							<span className="block bg-indigo-900 text-white px-2 sm:px-7 py-2 text-xs sm:text-sm rounded font-medium hover:bg-indigo-800" onClick={() => Sethamopen(false)}>Sign Up</span>
 
 						</Link>
 					</li>}
