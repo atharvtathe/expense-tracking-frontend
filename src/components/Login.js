@@ -79,12 +79,12 @@ const Login = () => {
 
 	return (
 		<div className="mt-20 max-w-sm lg:max-w-6xl mx-auto">
-			<div className="flex flex-col lg:flex-row justify-center items-center lg:mx-auto mx-2">
+			<div className="flex flex-col lg:flex-row  lg:mx-auto mx-2">
 				<div className="lg:w-1/2 w-full">
 					<img src="/signup-hero.jpg" alt="signup" />
 				</div>
-				<div className="lg:w-1/2 w-full  mb-10 lg:mb-0 rounded bg-gray-50 border">
-					<form className="pt-7 max-w-md mx-2 lg:mx-auto  px-5 my-5">
+				<div className="lg:w-1/2 w-full  mb-10 lg:mb-0 rounded bg-gray-50 h-96 lg:mt-24 border">
+					<form className="pt-7 max-w-md mx-2 lg:mx-auto  px-5 my-5 ">
 						{/* {aftersubmiterr && <Warning message={message} delay={5000} />} */}
 						<div className="flex flex-col mb-4">
 							<label className="mb-2 font-medium text-lg text-grey-darkest" htmlFor="email">Email</label>
