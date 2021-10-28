@@ -5,6 +5,7 @@ import AuthContext from './auth-context'
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "react-loader-spinner";
 
 
 const Signup = () => {
@@ -20,6 +21,7 @@ const Signup = () => {
 	const [aftersubmiterr, Setaftersubmiterr] = useState(false);
 
 	const [message, Setmessage] = useState('');
+	const [isloading, SetIsloading] = useState(false);
 
 	const authCtx = useContext(AuthContext);
 
@@ -50,6 +52,7 @@ const Signup = () => {
 
 	const formsubmithandler = event => {
 		event.preventDefault();
+		SetIsloading(true);
 
 		if (!validator.isEmail(email.trim())) {
 			Seterrorofemail(true);
@@ -61,6 +64,7 @@ const Signup = () => {
 			Setreerror(true);
 		}
 		if (!validator.isEmail(email.trim()) || (password.trim().length < 8) || (repassword !== password)) {
+			SetIsloading(false);
 			return;
 		}
 
@@ -81,9 +85,11 @@ const Signup = () => {
 					// console.log(data);
 					// console.log(message);
 					Setaftersubmiterr(true);
+					SetIsloading(false);
 				} else {
 					// console.log(data);
 					authCtx.login(data.token, data.userId);
+					SetIsloading(false);
 					history.replace('/');
 				}
 			});
@@ -117,7 +123,7 @@ const Signup = () => {
 							{reerror && <p className="text-red-400 text-xs">password do not match!</p>}
 						</div>
 						<ToastContainer />
-						<button className="block bg-indigo-900 hover:bg-indigo-800  text-white  text-lg mx-auto px-6 py-1 rounded" type="submit" onClick={formsubmithandler}>Sign Up</button>
+						<button className="block bg-indigo-900 hover:bg-indigo-800  text-white  text-lg mx-auto px-6 py-1 rounded" type="submit" onClick={formsubmithandler}>{isloading ? <Loader type="TailSpin" color="#FFFFFF" height={25} width={25} /> : <span>SignUp</span>}</button>
 					</form>
 				</div>
 

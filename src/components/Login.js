@@ -5,6 +5,7 @@ import AuthContext from './auth-context'
 import { useHistory, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "react-loader-spinner";
 
 
 const Login = () => {
@@ -18,6 +19,8 @@ const Login = () => {
 	const [aftersubmiterr, Setaftersubmiterr] = useState(false);
 
 	const [message, Setmessage] = useState('');
+
+	const [isloading, SetIsloading] = useState(false);
 
 	const authCtx = useContext(AuthContext);
 
@@ -41,6 +44,7 @@ const Login = () => {
 
 	const formsubmithandler = event => {
 		event.preventDefault();
+		SetIsloading(true);
 
 		if (!validator.isEmail(email.trim())) {
 			Seterrorofemail(true);
@@ -49,6 +53,7 @@ const Login = () => {
 			Seterrorofpassword(true);
 		}
 		if (!validator.isEmail(email.trim()) || (password.trim().length < 8)) {
+			SetIsloading(false);
 			return;
 		}
 
@@ -66,10 +71,13 @@ const Login = () => {
 					// console.log(message);
 					Setaftersubmiterr(true);
 					notify(data.message);
+					SetIsloading(false);
 				} else {
 					// console.log(data);
 					authCtx.login(data.token, data.userId);
+					SetIsloading(false);
 					history.replace('/');
+
 				}
 			});
 
@@ -97,7 +105,7 @@ const Login = () => {
 							{errorofpassword && <p className="text-red-400 text-xs">enter atleast 8 characters!</p>}
 						</div>
 						<ToastContainer />
-						<button className="block bg-indigo-900 hover:bg-indigo-800  text-white  text-lg mx-auto px-6 py-1 rounded" type="submit" onClick={formsubmithandler}>Login</button>
+						<button className="block bg-indigo-900 hover:bg-indigo-800  text-white  text-lg mx-auto px-6 py-1 rounded" type="submit" onClick={formsubmithandler}>{isloading ? <Loader type="TailSpin" color="#FFFFFF" height={25} width={25} /> : <span>Login</span>}</button>
 						<div className="flex flex-col mb-5 mt-5">
 							<div className="text-base">Don't have account ? <span className="text-blue-500"><Link to="/signup">Sign Up</Link></span></div>
 						</div>
