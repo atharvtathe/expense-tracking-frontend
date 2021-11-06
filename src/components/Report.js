@@ -8,7 +8,7 @@ const Report = () => {
 	const [datag, setdata] = useState([]);
 	const [datayear, setdatayear] = useState([]);
 	const [isloading, setloading] = useState(true);
-	const [month, setMonth] = useState(new Date().getMonth() + 1);
+	const [monthYear, setMonthYear] = useState(new Date().toISOString().substring(0, 7))
 
 	const authCtx = useContext(AuthContext);
 
@@ -20,7 +20,8 @@ const Report = () => {
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				month: 10
+				month: Number(monthYear.substring(5, 7)),
+				year: Number(monthYear.substring(0, 4))
 			})
 		};
 		const getevents = async () => {
@@ -38,7 +39,7 @@ const Report = () => {
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				year: 2021
+				year: Number(monthYear.substring(0, 4))
 			})
 		};
 		const getyearly = async () => {
@@ -52,8 +53,8 @@ const Report = () => {
 
 	}, []);
 
-	const monthchangehandler = (e) => {
-		setMonth(e.target.value);
+	const monthYearchangeHandler = (e) => {
+		setMonthYear(e.target.value);
 		const requestOptions = {
 			method: 'POST',
 			headers: {
@@ -61,7 +62,8 @@ const Report = () => {
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				month: Number(e.target.value)
+				month: Number(e.target.value.substring(5, 7)),
+				year: Number(e.target.value.substring(0, 4))
 			})
 		};
 		const getevents = async () => {
@@ -71,11 +73,27 @@ const Report = () => {
 			setdata(result.monthlydatalist)
 			setloading(false);
 		}
-		getevents();
 
+		const requestOptionone = {
+			method: 'POST',
+			headers: {
+				"Content-type": "application/json",
+				'Authorization': `Bearer ${authCtx.token}`
+			},
+			body: JSON.stringify({
+				year: Number(e.target.value.substring(0, 4))
+			})
+		};
+		const getyearly = async () => {
+			const res = await fetch(`${process.env.REACT_APP_backend_url}/api/expense/totalbyyeararray/${authCtx.userid}`, requestOptionone);
+			const result = await res.json();
+			setdatayear(result.yealydata)
+			setloading(false);
+		}
+		getevents();
+		getyearly();
 
 	}
-
 
 
 	const data = {
@@ -105,22 +123,8 @@ const Report = () => {
 	return (
 		<div className="mt-24 lg:max-w-5xl mx-auto">
 			<div className="flex flex-row items-center text-base ml-2">
-				<label htmlFor="cars" className="text-grey-darkest mr-3">Month :</label>
-
-				<select name="cars" id="cars" className="border py-1 px-1 text-grey-darkest focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded" value={month} onChange={monthchangehandler}>
-					<option value="1">January</option>
-					<option value="2">February</option>
-					<option value="3">March</option>
-					<option value="4">April</option>
-					<option value="5">May</option>
-					<option value="6">June</option>
-					<option value="7">July</option>
-					<option value="8">August</option>
-					<option value="9">September</option>
-					<option value="10">October</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
-				</select>
+				<label htmlFor="monthandyear" className="text-grey-darkest mr-3">Month :</label>
+				<input className="border py-1 px-1 text-grey-darkest focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded" type="month" id="monthandyear" value={monthYear} onChange={(e) => monthYearchangeHandler(e)}></input>
 			</div>
 			<div>
 				{datag && <Line data={data} />}

@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 
 import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import Loader from "react-loader-spinner";
 
 import Modal from './Modal';
 import Modaldel from './Modaldel'
@@ -13,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Home = () => {
-	const [isloading, setloading] = useState(true);
+	const [isloading, setloading] = useState(false);
 	const [expenses, setExpenses] = useState([]);
 	const [value, onChange] = useState(new Date());
 
@@ -71,11 +72,12 @@ const Home = () => {
 
 	const addexpensehandler = async () => {
 
-		if (!amount || !place || !reason || !date || !time) {
+		if (!amount || !reason || !date) {
 			// console.log("please fill all the data")
 			notify();
 			return;
 		}
+		setloading(true);
 		setAmount(0);
 		// setDate('');
 		setReason('');
@@ -119,6 +121,7 @@ const Home = () => {
 				setloading(false);
 			}
 			getevents();
+			setloading(false);
 		}
 
 
@@ -256,7 +259,7 @@ const Home = () => {
 						</div>
 						<ToastContainer />
 
-						<button className="bg-indigo-900 px-3 py-1 hover:bg-indigo-800 border-none text-white rounded" onClick={addexpensehandler}>Add</button>
+						<button className="bg-indigo-900 w-16 px-3 py-1 hover:bg-indigo-800 border-none text-white rounded flex justify-center" onClick={addexpensehandler}>{isloading ? <Loader type="TailSpin" color="#FFFFFF" height={20} width={20} /> : <span>Add</span>}</button>
 
 					</div>
 				</div>
