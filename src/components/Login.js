@@ -108,6 +108,7 @@ const Login = () => {
 						<button className="block bg-indigo-900 hover:bg-indigo-800  text-white  text-lg mx-auto px-6 py-1 rounded" type="submit" onClick={formsubmithandler}>{isloading ? <Loader type="TailSpin" color="#FFFFFF" height={25} width={25} /> : <span>Login</span>}</button>
 						<div className="flex flex-col mb-5 mt-5">
 							<div className="text-base">Don't have account ? <span className="text-blue-500"><Link to="/signup">Sign Up</Link></span></div>
+							<div className="text-base">Forget Password ? <span className="text-blue-500"><Link to="/resetpassword">Reset</Link></span></div>
 						</div>
 					</form>
 				</div>
