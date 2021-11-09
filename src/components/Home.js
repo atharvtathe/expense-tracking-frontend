@@ -31,6 +31,7 @@ const Home = () => {
 	const [month, setMonth] = useState(new Date().getMonth() + 1);
 	const [getbydate, setgetbydate] = useState(new Date().toISOString().substring(0, 10));
 	const [filterby, setfilterby] = useState(true);
+	const [year, setyear] = useState(new Date().getFullYear());
 
 	const authCtx = useContext(AuthContext);
 
@@ -47,7 +48,9 @@ const Home = () => {
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				month: Number(month)
+				month: Number(month),
+				year: year
+
 			})
 		};
 		const getevents = async () => {
@@ -111,7 +114,8 @@ const Home = () => {
 					'Authorization': `Bearer ${authCtx.token}`
 				},
 				body: JSON.stringify({
-					month: Number(month)
+					month: Number(month),
+					year: year
 				})
 			};
 			const getevents = async () => {
@@ -147,7 +151,8 @@ const Home = () => {
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				month: Number(e.target.value)
+				month: Number(e.target.value),
+				year: year
 			})
 		};
 		const getevents = async () => {
@@ -191,7 +196,8 @@ const Home = () => {
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				month: Number(month)
+				month: Number(month),
+				year: year
 			})
 		};
 		const getevents = async () => {
@@ -314,8 +320,8 @@ const Home = () => {
 
 
 
-				<div className={`${isopen ? "block" : "hidden"}`} ><Modal filterby={filterby} getbydate={getbydate} month={month} isopen={isopen} setisopen={setisopen} id={id} expenses={expenses} setExpenses={setExpenses} /></div>
-				<div className={`${isopendel ? "block" : "hidden"}`} ><Modaldel filterby={filterby} getbydate={getbydate} month={month} isopendel={isopendel} setisopendel={setisopendel} id={id} expenses={expenses} setExpenses={setExpenses} /></div>
+				<div className={`${isopen ? "block" : "hidden"}`} ><Modal year={year} filterby={filterby} getbydate={getbydate} month={month} isopen={isopen} setisopen={setisopen} id={id} expenses={expenses} setExpenses={setExpenses} /></div>
+				<div className={`${isopendel ? "block" : "hidden"}`} ><Modaldel year={year} filterby={filterby} getbydate={getbydate} month={month} isopendel={isopendel} setisopendel={setisopendel} id={id} expenses={expenses} setExpenses={setExpenses} /></div>
 				<div className="mt-5">
 					<div className="flex flex-col">
 						<div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

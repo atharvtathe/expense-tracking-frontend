@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import AuthContext from './auth-context'
 import { toast } from 'react-toastify';
 
-const Modal = ({ filterby, getbydate, month, isopendel, setisopendel, expenses, setExpenses, id }) => {
+const Modal = ({ year, filterby, getbydate, month, isopendel, setisopendel, expenses, setExpenses, id }) => {
 
 	const authCtx = useContext(AuthContext);
 
@@ -24,7 +24,8 @@ const Modal = ({ filterby, getbydate, month, isopendel, setisopendel, expenses, 
 				'Authorization': `Bearer ${authCtx.token}`
 			},
 			body: JSON.stringify({
-				month: Number(month)
+				month: Number(month),
+				year: year
 			})
 		};
 		const getevents = async () => {
