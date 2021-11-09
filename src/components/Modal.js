@@ -40,7 +40,7 @@ const Modal = ({ year, filterby, getbydate, month, isopen, setisopen, expenses, 
 
 
 	const updatehandler = () => {
-		if (!Mamount || !Mplace || !Mreason || !Mdate || !Mtime) {
+		if (!Mamount || !Mreason || !Mdate) {
 			// console.log("please fill all the data")
 			notifyon()
 			return;
