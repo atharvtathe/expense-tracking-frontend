@@ -101,10 +101,11 @@ const Report = () => {
 		datasets: [{
 			label: 'Daily Expenses',
 			data: datag,
-			backgroundColor: 'rgb(255, 249, 64)',
+			backgroundColor: 'rgb(255, 235, 235)',
 			borderColor: 'rgb(255, 99, 132)',
 			borderWidth: 4,
-			tension: 0.3
+			tension: 0.3,
+			fill: true
 		}]
 	}
 
@@ -113,10 +114,11 @@ const Report = () => {
 		datasets: [{
 			label: 'Monthly Expenses',
 			data: datayear,
-			backgroundColor: 'rgb(255, 249, 64)',
+			backgroundColor: 'rgb(244, 237, 255)',
 			borderColor: 'rgb(140, 59, 255)',
 			borderWidth: 4,
-			tension: 0.3
+			tension: 0.3,
+			fill: true
 		}]
 	}
 
