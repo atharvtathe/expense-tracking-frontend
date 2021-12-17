@@ -259,9 +259,25 @@ const Home = () => {
 							</div>
 
 						</div>
-						<div className="flex flex-col mb-4">
+						{/* <div className="flex flex-col mb-4">
 							<label className="mb-1 text-grey-darkest" htmlFor="location">Location</label>
 							<input className="border py-1 px-3 text-grey-darkest focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded" type="text" name="location" value={place} id="location" autoComplete="off" onChange={e => setPlace(e.target.value)} />
+						</div> */}
+						<div className="flex flex-col mb-4">
+							<label className="mb-1 text-grey-darkest" htmlFor="location">Category</label>
+							<select className="border py-1 px-3 mt-1 text-grey-darkest focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded" name="location" value={place} id="location" onChange={e => setPlace(e.target.value)} >
+								<option value="">Select category</option>
+								<option value="Shopping">Shopping</option>
+								<option value="Bills and utilities">Bill and Utilities</option>
+								<option value="Travel">Travel</option>
+								<option value="Food and Beverages">Food and Beverages</option>
+								<option value="Health and fitness">Health and Fitness</option>
+								<option value="Housing">Housing</option>
+								<option value="Insurance">Insurance</option>
+								<option value="Education">Education</option>
+								<option value="Entertainment">Entertainment</option>
+								<option value="Other">Other</option>
+							</select>
 						</div>
 						<ToastContainer />
 
@@ -334,7 +350,7 @@ const Home = () => {
 													Reason
 												</th>
 												<th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-													Location
+													Category
 												</th>
 												<th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
 													Amount

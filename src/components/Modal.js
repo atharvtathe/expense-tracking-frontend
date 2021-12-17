@@ -121,7 +121,19 @@ const Modal = ({ year, filterby, getbydate, month, isopen, setisopen, expenses, 
 						</div>
 						<div className="flex flex-col mb-4">
 							<label className="mb-1 text-grey-darkest" htmlFor="location">Location</label>
-							<input className="border py-1 px-3 text-grey-darkest focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded" type="text" name="location" value={Mplace} id="location" autoComplete="off" onChange={e => setPlace(e.target.value)} />
+							<select className="border py-1 px-3 text-grey-darkest focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded"  name="location" value={Mplace} id="location" onChange={e => setPlace(e.target.value)} >
+								<option value="">Select category</option>
+								<option value="Shopping">Shopping</option>
+								<option value="Bills and utilities">Bill and Utilities</option>
+								<option value="Travel">Travel</option>
+								<option value="Food and Beverages">Food and Beverages</option>
+								<option value="Health and fitness">Health and Fitness</option>
+								<option value="Housing">Housing</option>
+								<option value="Insurance">Insurance</option>
+								<option value="Education">Education</option>
+								<option value="Entertainment">Entertainment</option>
+								<option value="Other">Other</option>
+							</select>
 						</div>
 						{/* <ToastContainer /> */}
 
